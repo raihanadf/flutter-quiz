@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("ahihaiahi"),),
         body: Container(
-          padding: EdgeInsets.all(30),
+          padding: EdgeInsets.all(20),
           child: Column(children: [
             Question(questions[_questionIndex]),
             ElevatedButton(

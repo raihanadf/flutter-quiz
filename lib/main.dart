@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'question.dart';
+import 'answer.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,42 +18,27 @@ class _MyAppState extends State<MyApp> {
     "Siapa presiden nomor satu?",
     "Kuliah penting atau tidak?",
   ];
-  void answerQuestion() {
+  void _answerQuestion() {
     setState(() {
-      if(_questionIndex < questions.length - 1) _questionIndex += 1;
+      if (_questionIndex < questions.length - 1) _questionIndex += 1;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text("ahihaiahi"),),
+          title: Text("ahihaiahi"),
+        ),
         body: Container(
           padding: EdgeInsets.all(20),
           child: Column(children: [
             Question(questions[_questionIndex]),
-            ElevatedButton(
-                onPressed: answerQuestion,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon(Icons.question_answer), Text("Answer one")],
-                )),
-            ElevatedButton(
-                onPressed: answerQuestion,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon(Icons.question_answer), Text("Answer two")],
-                )),
-            ElevatedButton(
-                onPressed: answerQuestion,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon(Icons.question_answer), Text("Answer three")],
-                ))
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
           ]),
         ),
       ),

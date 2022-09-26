@@ -14,13 +14,23 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
   var questions = [
-    "Kamu mau gak jadi pacarku?",
-    "Siapa presiden nomor satu?",
-    "Kuliah penting atau tidak?",
+    {
+      'questionText': "Kamu mau gak jadi pacarku?",
+      'answers': ['Ya', 'Boleh lah', 'Mauuu']
+    },
+    {
+      'questionText': "Siapa presiden nomor satu?",
+      'answers': ['jokowiw', 'megawati', 'suharto']
+    },
+    {
+      'questionText': "Kuliah penting atau tidak?",
+      'answers': ['lumayan', 'lumayan gak penting', 'b aja']
+    },
   ];
   void _answerQuestion() {
     setState(() {
       if (_questionIndex < questions.length - 1) _questionIndex += 1;
+      print(questions[_questionIndex]['answers']);
     });
   }
 
@@ -35,10 +45,10 @@ class _MyAppState extends State<MyApp> {
         body: Container(
           padding: EdgeInsets.all(20),
           child: Column(children: [
-            Question(questions[_questionIndex]),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
+            Question(questions[_questionIndex]['questionText']),
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) => Answer(_answerQuestion, answer))
+                .toList(),
           ]),
         ),
       ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/quiz.dart';
+import 'package:quiz/result.dart';
 import 'question.dart';
 import 'answer.dart';
+import 'result.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +16,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
-  var questions = [
+  var _questions = [
     {
       'questionText': "Kamu mau gak jadi pacarku?",
       'answers': ['Ya', 'Boleh lah', 'Mauuu']
@@ -29,7 +32,7 @@ class _MyAppState extends State<MyApp> {
   ];
   void _answerQuestion() {
     setState(() {
-      if (_questionIndex < questions.length) _questionIndex += 1;
+      if (_questionIndex < _questions.length) _questionIndex += 1;
     });
   }
 
@@ -41,15 +44,9 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("ahihaiahi"),
         ),
-        body:_questionIndex < questions.length ? Container(
-          padding: EdgeInsets.all(20),
-          child: Column(children: [
-            Question(questions[_questionIndex]['questionText'] as String),
-            ...(questions[_questionIndex]['answers'] as List<String>)
-                .map((answer) => Answer(_answerQuestion, answer))
-                .toList(),
-          ]),
-        ) : Center(child: Text("okelah ya"),),
+        body: _questionIndex < _questions.length
+            ? Quiz(questions: _questions, answerQuestion: _answerQuestion, questionIndex: _questionIndex)
+            : Result(),
       ),
     );
   }

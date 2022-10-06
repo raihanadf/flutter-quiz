@@ -29,8 +29,7 @@ class _MyAppState extends State<MyApp> {
   ];
   void _answerQuestion() {
     setState(() {
-      if (_questionIndex < questions.length - 1) _questionIndex += 1;
-      print(questions[_questionIndex]['answers']);
+      if (_questionIndex < questions.length) _questionIndex += 1;
     });
   }
 
@@ -42,15 +41,15 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("ahihaiahi"),
         ),
-        body: Container(
+        body:_questionIndex < questions.length ? Container(
           padding: EdgeInsets.all(20),
           child: Column(children: [
-            Question(questions[_questionIndex]['questionText']),
+            Question(questions[_questionIndex]['questionText'] as String),
             ...(questions[_questionIndex]['answers'] as List<String>)
                 .map((answer) => Answer(_answerQuestion, answer))
                 .toList(),
           ]),
-        ),
+        ) : Center(child: Text("okelah ya"),),
       ),
     );
   }
